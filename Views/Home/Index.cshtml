@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Ana Sayfa";
+    
+}
+<style>
+    /* Resim */
+    .image-container {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    img {
+        max-width: 500px;
+        height: auto;
+    }
+
+    /* Butonlar */
+    .buttons-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 18px;
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    button#yes {
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+
+    button#no {
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        position: absolute;
+    }
+
+    /* Mobil cihazlara özel düzenlemeler */
+    @@media (max-width: 768px) {
+    img {
+        max-width: 300px; /* Küçük ekranlarda resmi küçült */
+    }
+
+    button {
+        padding: 8px 16px; /* Butonları daha küçük yap */
+        font-size: 16px;
+    }
+
+    .buttons-container {
+        margin-top: 30px;
+    }
+
+    h2 {
+        font-size: 16px; /* Başlığı küçült */
+    }
+    }
+</style>
+<script>
+    window.onload = function () {
+        const noButton = document.getElementById("no");
+
+        // Masaüstü mouse etkisi
+        noButton.addEventListener("mousemove", function () {
+            // Tarayıcının genişliği ve yüksekliğini al
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+
+            // Rastgele pozisyonlar üret
+            const randomX = Math.random() * (screenWidth - noButton.offsetWidth);
+            const randomY = Math.random() * (screenHeight - noButton.offsetHeight);
+
+            // "Hayır" butonuna rastgele pozisyon uygula
+            noButton.style.left = randomX + "px";
+            noButton.style.top = randomY + "px";
+        });
+
+        // Mobil dokunma etkisi
+        noButton.addEventListener("touchstart", function () {
+            // Tarayıcının genişliği ve yüksekliğini al
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+
+            // Rastgele pozisyonlar üret
+            const randomX = Math.random() * (screenWidth - noButton.offsetWidth);
+            const randomY = Math.random() * (screenHeight - noButton.offsetHeight);
+
+            // "Hayır" butonuna rastgele pozisyon uygula
+            noButton.style.left = randomX + "px";
+            noButton.style.top = randomY + "px";
+        });
+    };
+</script>
+
+
+<div class="image-container">
+    <img src="/img/images-2.jpeg" />
+</div>
+
+<h2 style="text-align: center;">Barışalım mı?</h2>
+
+<div class="buttons-container">
+    <form asp-action="YesAction" method="post">
+        <button id="yes" type="submit">Evet</button>
+    </form>
+    <button id="no">Hayır</button>
+</div>
+
+

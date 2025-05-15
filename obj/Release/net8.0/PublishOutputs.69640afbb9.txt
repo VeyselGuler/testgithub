@@ -1,0 +1,7 @@
+/Users/veyselmor/Desktop/ecemsite/ecem
+/Users/veyselmor/Desktop/ecemsite/appsettings.Development.json
+/Users/veyselmor/Desktop/ecemsite/appsettings.json
+/Users/veyselmor/Desktop/ecemsite/ecem.dll
+/Users/veyselmor/Desktop/ecemsite/ecem.deps.json
+/Users/veyselmor/Desktop/ecemsite/ecem.runtimeconfig.json
+/Users/veyselmor/Desktop/ecemsite/ecem.pdb
