@@ -17,13 +17,13 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ecem.sln
 
       - name: Build
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build ecem.sln --no-restore --configuration Release
 
       - name: Publish
-        run: dotnet publish ./TestGithub/TestGithub.csproj -c Release -o ./publish
+        run: dotnet publish ecem.csproj -c Release -o publish
 
       - name: Copy files to server
         uses: appleboy/scp-action@master
