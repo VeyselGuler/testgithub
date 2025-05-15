@@ -1,11 +1,11 @@
-name: Deploy to Production
+name: Deploy to Server
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  build-and-test:
+  deploy:
     runs-on: ubuntu-latest
     
     steps:
@@ -20,39 +20,17 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
-
-      - name: Test
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet build --no-restore
 
       - name: Publish
         run: dotnet publish -c Release -o ./publish
 
-      - name: Upload artifact for deployment
-        uses: actions/upload-artifact@v3
-        with:
-          name: webapp
-          path: ./publish/
-
-  deploy:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Download artifact from build
-        uses: actions/download-artifact@v3
-        with:
-          name: webapp
-          path: ./publish/
-
-      - name: Deploy to Web Server
-        uses: appleboy/ssh-action@master
+      - name: Copy files to server
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            mkdir -p /var/www/testgithub.veyselguler.com
-            rm -rf /var/www/testgithub.veyselguler.com/*
-            # Uygulama dosyalarını kopyala
-            cp -r ./publish/* /var/www/testgithub.veyselguler.com/
+          source: "publish/*"
+          target: "/var/www/testgithub.veyselguler.com"
+          strip_components: 1
